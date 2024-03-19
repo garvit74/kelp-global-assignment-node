@@ -18,7 +18,7 @@ async function printAgeDistribution() {
                 WHEN age > 60 THEN '> 60'
               END as age_group,
               COUNT(*) * 100.0 / (SELECT COUNT(*) FROM csv_data)::float as percentage
-            FROM users
+            FROM csv_data
             GROUP BY age_group
             ORDER BY age_group;
         `;
