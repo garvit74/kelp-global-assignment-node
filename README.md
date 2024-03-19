@@ -19,8 +19,8 @@ This Node.js application efficiently parses large CSV files with complex, deeply
 
 1. **Clone the Repository**
     ```bash
-    git clone https://github.com/your-repository/large-csv-parser.git
-    cd large-csv-parser
+    git clone https://github.com/garvit74/kelp-global-assignment-node.git
+    cd kelp-global-assignment-node
     ```
 
 2. **Install Dependencies**
@@ -29,14 +29,14 @@ This Node.js application efficiently parses large CSV files with complex, deeply
     ```
 
 3. **Configure Environment**
-    Create a `.env` file in the root of the project with the following content, adjusted to match your database configuration:
+   In the config file please update the variables for your local system.
     ```plaintext
-    DB_HOST=localhost
-    DB_USER=your_username
-    DB_PASS=your_password
-    DB_NAME=your_database
-    DB_PORT=5432
-    CSV_FILE_PATH=./path_to_your_csv_file.csv
+    dbHost="localhost"
+    dbUser="your_username"
+    dbPassword="your_password"
+    dbName="your_database"
+    dbPost="5432"
+    CSV_FILE_PATH="./path_to_your_csv_file.csv"
     ```
 
 4. **Database Setup**
@@ -46,4 +46,4 @@ This Node.js application efficiently parses large CSV files with complex, deeply
 
 To run the application and upload data from your CSV file to the database:
 ```bash
-node app.js
+node run dev
