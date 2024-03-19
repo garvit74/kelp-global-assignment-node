@@ -4,5 +4,6 @@ module.exports = {
     dbPassword: '1234',
     dbHost: 'localhost',
     dbName: 'kelp-assignment',
-    dbPort: 5432, // PostgreSQL default port
+    dbPort: 5432,
+    CSV_FILE_PATH: "C:\\Users\\agarv\\Downloads\\MOCK_DATA (1).csv" // PostgreSQL default port
 };

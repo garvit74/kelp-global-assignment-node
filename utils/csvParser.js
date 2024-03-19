@@ -1,41 +1,41 @@
-// utils/csvParser.js
 const fs = require('fs');
-const csv = require('csv-parser');
+const csvParser = require('csv-parser'); 
 
-const parse = (filePath) => {
-    return new Promise((resolve, reject) => {
-        const jsonData = [];
-        fs.createReadStream(filePath)
-            .pipe(csv())
-            .on('data', (row) => {
-                // Extract data from CSV row
-                const { firstName, lastName, age, addressLine1, addressLine2, addressCity, addressState, gender } = row;
+function parseCSV(filePath) {
+  const results = [];
 
-                // Construct data object
-                const data = {
-                    name: { firstName, lastName },
-                    age: parseInt(age),
-                    address: {
-                        line1: addressLine1,
-                        line2: addressLine2,
-                        city: addressCity,
-                        state: addressState
-                    },
-                    additional_info: {
-                        gender: gender
-                    }
-                };
+  return new Promise((resolve, reject) => {
+    fs.createReadStream(filePath)
+      .pipe(csvParser())
+      .on('data', (data) => {
+        const parsedData = parseNestedProperties(data);
+        results.push(parsedData);
+      })
+      .on('end', () => {
+        resolve(results);
+      })
+      .on('error', reject);
+  });
+}
 
-                // Push data object to jsonData array
-                jsonData.push(data);
-            })
-            .on('end', () => {
-                resolve(jsonData);
-            })
-            .on('error', (error) => {
-                reject(error);
-            });
+function parseNestedProperties(data) {
+  const result = {};
+
+  for (const [key, value] of Object.entries(data)) {
+    const keys = key.split('.');
+    let current = result;
+
+    keys.forEach((keyPart, index) => {
+      if (index === keys.length - 1) {
+        current[keyPart] = value;
+      } else {
+        if (!current[keyPart]) current[keyPart] = {};
+        current = current[keyPart];
+      }
     });
-};
+  }
 
-module.exports = { parse };
+  return result;
+}
+
+module.exports = { parseCSV };

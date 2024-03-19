@@ -1,14 +1,13 @@
-// app.js
 const express = require('express');
+const { pool } = require('./utils/dbConfig');
+const indexRouter = require('./routes/csvRoutes');
+
 const app = express();
-const csvRoutes = require('./routes/csvRoutes');
+const PORT = process.env.PORT || 3000;
 
-// Middleware
 app.use(express.json());
+app.use('/', indexRouter);
 
-// Routes
-app.use('/api/csv', csvRoutes);
-
-// Start the server
-const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Server is running on port ${port}`));
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
