@@ -47,3 +47,14 @@ This Node.js application efficiently parses large CSV files with complex, deeply
 To run the application and upload data from your CSV file to the database:
 ```bash
 node run dev
+```
+
+#### Screenshots
+
+1. Displaying the Users
+
+![alt text](image.png)
+
+2. Output shown in the console
+
+![alt text](image-1.png)
